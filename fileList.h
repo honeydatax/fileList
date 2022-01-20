@@ -71,14 +71,27 @@ void fileCopy(char *file1,char *file2){
 	int f2;
 	size_t sizes;
 	ccc=cc;
-	f1=open(file1,O_RDONLY);
-	f2=creat(file2,O_WRONLY);
-	if(f1>0 && f2>0){
-		sizes=2070;
-		while(sizes!=0){
-			sizes=read(f1,ccc,2070);
+	if (file1!=NULL && file1!=NULL){
+		f1=open(file1,O_RDONLY);
+		f2=creat(file2,O_WRONLY);
+		if(f1>0 && f2>0){
+			sizes=2070;
+			while(sizes!=0){
+				sizes=read(f1,ccc,2070);
 				write(f2,&ccc,sizes);				
+			}
 		}
 	}
-	
+}
+int fileExists(char *file){
+	FILE* f1;
+	if(file==NULL) return 0;
+	f1=fopen(file,"r");
+	if(f1!=NULL){
+		fclose(f1);
+		return -1;
+	}else{
+		return 0;
+	}
+	return 0;
 }
