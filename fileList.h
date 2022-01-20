@@ -1,5 +1,9 @@
 #include <dirent.h>
 #include "cstring.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 char *fileLists(char *directory){
 	char *lst;
 	struct dirent *ldir;
@@ -58,4 +62,23 @@ char *fileLists(char *directory){
 		}
 	}
 	return lst;
+}
+
+void fileCopy(char *file1,char *file2){
+	char cc[2080];
+	char *ccc;
+	int f1;
+	int f2;
+	size_t sizes;
+	ccc=cc;
+	f1=open(file1,O_RDONLY);
+	f2=creat(file2,O_WRONLY);
+	if(f1>0 && f2>0){
+		sizes=2070;
+		while(sizes!=0){
+			sizes=read(f1,ccc,2070);
+				write(f2,&ccc,sizes);				
+		}
+	}
+	
 }
