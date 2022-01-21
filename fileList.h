@@ -148,3 +148,15 @@ char *fgetcol(char *c,int sizes,FILE * f1){
 	}
 	return cc;
 }
+int isAccess(char *file){
+	FILE* f1;
+	if(file==NULL) return 0;
+	f1=fopen(file,"r");
+	if(f1!=NULL){
+		fclose(f1);
+		return -1;
+	}else{
+		return 0;
+	}
+	return 0;
+}
