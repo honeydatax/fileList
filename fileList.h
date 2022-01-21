@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <errno.h>
 char *fileLists(char *directory){
 	char *lst;
 	struct dirent *ldir;
@@ -87,12 +88,15 @@ int fileExists(char *file){
 	FILE* f1;
 	if(file==NULL) return 0;
 	f1=fopen(file,"r");
+	if(errno==2)return 0;
 	if(f1!=NULL){
 		fclose(f1);
 		return -1;
 	}else{
+		if(errno!=2)return -1;
 		return 0;
 	}
+	if(errno!=2)return -1;
 	return 0;
 }
 char *fgetstr(char *c,int sizes,char *s,FILE * f1){
