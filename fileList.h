@@ -160,3 +160,39 @@ int isAccess(char *file){
 	}
 	return 0;
 }
+
+char *loadtxt(char *argv,int sizes){
+	int n;
+	char *c;
+	char *cc;
+	char *ccc;
+	char *cccc;
+	FILE* f;
+	int style3=0;
+	int style2=0;
+	int style=0;
+	c=NULL;
+	int r=0;
+		if(argv!=NULL){
+			f=fopen(argv,"r");
+			if (f!=NULL){
+				fseek(f,0,SEEK_END);
+				n=ftell(f);
+				if(n<sizes+1){
+					fseek(f,0,SEEK_SET);
+					c=malloc(n+5);
+					if (c!=NULL){
+						style=0;
+						c[0]=0;
+						fread(c,n,1,f);
+						c[n]=0;
+						r=0;
+						ccc=c;
+			
+					}
+				}
+			}
+		}
+	return c;
+}
+
