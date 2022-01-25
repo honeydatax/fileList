@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <time.h>
 
 char *Nulls="";
 char *fileLists(char *directory){
@@ -229,4 +230,25 @@ char *ext(char *s){
 	if(cc!=NULL)cc=cc+1;
 	return cc;
 }
+void tempmk(char *c){
+	//prevent from 2 instances of the same program currupt data from same file
 
+	int i;
+	int ii;
+	int iii;
+	int n;
+	char r;
+	char cc[]="abcdefghijklmnopqrstuvwxyz0123456789000000000000";
+	srand(time(NULL));
+	for(n=0;n<12;n++){
+		if (n==8){
+			r='.';
+			c[n]='.';
+		}else{
+			r=(char)((char) rand())/7;
+		c[n]=cc[r];
+		}
+
+	}
+	c[12]=0;
+}
