@@ -5,6 +5,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
+
+char *Nulls="";
 char *fileLists(char *directory){
 	char *lst;
 	struct dirent *ldir;
@@ -188,11 +190,43 @@ char *loadtxt(char *argv,int sizes){
 						c[n]=0;
 						r=0;
 						ccc=c;
-			
+						
 					}
 				}
+				fclose(f);
 			}
 		}
 	return c;
+}
+char *fileName(char *s){
+	char *ss;
+	ss=s;
+	if(s!=NULL){ 
+		ss=strrchr(s,'/');
+		if(ss==NULL){
+			ss=s;
+		}else{
+			ss=ss+1;
+		}
+			
+	} 
+	return ss;
+}
+char *file(char *s){
+	char *c;
+	char *cc;
+	cc=NULL;
+	c=newString(fileName(s));
+	cc=strrchr(c,'.');
+	if(cc!=NULL)cc[0]=0;
+	return c;
+}
+char *ext(char *s){
+	char *c;
+	char *cc;
+	cc=NULL;
+	cc=strrchr(s,'.');
+	if(cc!=NULL)cc=cc+1;
+	return cc;
 }
 
