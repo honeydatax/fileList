@@ -252,3 +252,19 @@ void tempmk(char *c){
 	}
 	c[12]=0;
 }
+void tempdate(char *s){
+	char *ss;
+	struct tm tm1;
+	struct tm *tm1s;
+	struct tm *tm2s;
+	time_t t;
+	t=time(NULL);
+	tm1s=&tm1;
+	//ss=ctime_r(t,"%F");
+	tm2s=gmtime_r(&t,tm1s);
+	if(tm2s==NULL){
+		s[0]=0;
+	}else{
+		strftime(s,100,"%F-%T%p",tm1s);
+	}
+}
